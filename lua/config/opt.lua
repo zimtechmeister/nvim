@@ -8,7 +8,7 @@ vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
---  TODO: vim.opt.showmode = false
+vim.opt.showmode = false
 
 vim.opt.clipboard = 'unnamedplus'
 
