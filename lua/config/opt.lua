@@ -57,4 +57,5 @@ vim.opt.wrap = false
 
 vim.opt.scrolloff = 8
 
---  TODO: vim.opt.netrw_banner 0
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
