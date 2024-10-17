@@ -7,7 +7,7 @@ return {
         -- directly inside the plugin declaration.
         vim.g.termguicolors = true
         vim.opt.background = 'dark'
-        vim.g.gruvbox_material_background = 'hard'
+        vim.g.gruvbox_material_background = 'medium'
         vim.g.gruvbox_material_enable_italic = true
         vim.cmd.colorscheme 'gruvbox-material'
     end,
