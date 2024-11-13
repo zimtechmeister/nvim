@@ -1,4 +1,5 @@
 return {
+    -- LSP
     {
         'williamboman/mason.nvim',
         config = function()
@@ -44,12 +45,14 @@ return {
                     vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
                     vim.keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
                     vim.keymap.set('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-                    vim.keymap.set({'n', 'x'}, '<leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                    vim.keymap.set({ 'n', 'x' }, '<leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
                     vim.keymap.set('n', '<leader>lc', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
                 end,
             })
         end
     },
+
+    -- completion
     {
         "hrsh7th/cmp-nvim-lsp",
     },
@@ -57,19 +60,69 @@ return {
         "hrsh7th/nvim-cmp",
         config = function()
             local cmp = require('cmp')
+            local luasnip = require('luasnip')
 
             cmp.setup({
-              sources = {
-                {name = 'nvim_lsp'},
-              },
-              snippet = {
-                expand = function(args)
-                  -- You need Neovim v0.10 to use vim.snippet
-                  vim.snippet.expand(args.body)
-                end,
-              },
-              mapping = cmp.mapping.preset.insert({}),
+                sources = {
+                    { name = 'nvim_lsp', group_index = 1 },
+                    { name = 'copilot', group_index = 1 },
+                    { name = 'path', group_index = 2 },
+                    { name = 'luasnip', group_index = 3 },
+                },
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    -- Jump to the next snippet placeholder
+                    ['<C-f>'] = cmp.mapping(function(fallback)
+                        if luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    -- Jump to the previous snippet placeholder
+                    ['<C-b>'] = cmp.mapping(function(fallback)
+                        if luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                }),
             })
         end
     },
+
+    -- Snippets
+    {
+        "L3MON4D3/LuaSnip",
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+        config = function()
+            require("luasnip").setup()
+        end
+    },
+
+    -- Copilot
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+    },
+    {
+        "zbirenbaum/copilot-cmp",
+        after = "copilot",
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    }
 }
