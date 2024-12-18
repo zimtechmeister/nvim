@@ -10,7 +10,7 @@ return {
         'williamboman/mason-lspconfig.nvim',
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "jdtls", "clangd" }
+                ensure_installed = { "lua_ls", "jdtls", "clangd", "eslint" }
             })
         end
     },
@@ -30,6 +30,7 @@ return {
             require('lspconfig').lua_ls.setup({})
             require('lspconfig').jdtls.setup({})
             require('lspconfig').clangd.setup({})
+            require('lspconfig').eslint.setup({})
 
             -- Autocmd to set up LSP-specific key mappings on LSP attach
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -65,9 +66,9 @@ return {
             cmp.setup({
                 sources = {
                     { name = 'nvim_lsp', group_index = 1 },
-                    { name = 'copilot', group_index = 1 },
-                    { name = 'path', group_index = 2 },
-                    { name = 'luasnip', group_index = 3 },
+                    { name = 'copilot',  group_index = 1 },
+                    { name = 'path',     group_index = 2 },
+                    { name = 'luasnip',  group_index = 3 },
                 },
                 snippet = {
                     expand = function(args)
@@ -95,6 +96,9 @@ return {
             })
         end
     },
+    {
+        "hrsh7th/cmp-path",
+    },
 
     -- Snippets
     {
@@ -120,7 +124,6 @@ return {
     },
     {
         "zbirenbaum/copilot-cmp",
-        after = "copilot",
         config = function()
             require("copilot_cmp").setup()
         end,
