@@ -1,5 +1,4 @@
 return {
-    -- LSP
     {
         'williamboman/mason.nvim',
         config = function()
@@ -16,21 +15,24 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        dependencies = {
+            "saghen/blink.cmp",
+            {
+                "folke/lazydev.nvim",
+                opts = {
+                    library = {
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
+        },
         config = function()
-            -- Add cmp_nvim_lsp capabilities to lspconfig
-            local lspconfig_defaults = require('lspconfig').util.default_config
-            lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-                'force',
-                lspconfig_defaults.capabilities,
-                require('cmp_nvim_lsp').default_capabilities()
-            )
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-            --configure language servers
-            -- implement the lsp servers installed from ensure installed at mason-lspconfig
-            require('lspconfig').lua_ls.setup({})
-            require('lspconfig').jdtls.setup({})
-            require('lspconfig').clangd.setup({})
-            require('lspconfig').eslint.setup({})
+            require("lspconfig").lua_ls.setup { capabilities = capabilities }
+            require("lspconfig").jdtls.setup { capabilities = capabilities }
+            require("lspconfig").clangd.setup { capabilities = capabilities }
+            require("lspconfig").eslint.setup { capabilities = capabilities }
 
             -- Autocmd to set up LSP-specific key mappings on LSP attach
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -52,80 +54,4 @@ return {
             })
         end
     },
-
-    -- completion
-    {
-        "hrsh7th/cmp-nvim-lsp",
-    },
-    {
-        "hrsh7th/nvim-cmp",
-        config = function()
-            local cmp = require('cmp')
-            local luasnip = require('luasnip')
-
-            cmp.setup({
-                sources = {
-                    { name = 'nvim_lsp', group_index = 1 },
-                    { name = 'copilot',  group_index = 1 },
-                    { name = 'path',     group_index = 2 },
-                    { name = 'luasnip',  group_index = 3 },
-                },
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    -- Jump to the next snippet placeholder
-                    ['<C-f>'] = cmp.mapping(function(fallback)
-                        if luasnip.locally_jumpable(1) then
-                            luasnip.jump(1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                    -- Jump to the previous snippet placeholder
-                    ['<C-b>'] = cmp.mapping(function(fallback)
-                        if luasnip.locally_jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                }),
-            })
-        end
-    },
-    {
-        "hrsh7th/cmp-path",
-    },
-
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        config = function()
-            require("luasnip").setup()
-        end
-    },
-
-    -- Copilot
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            })
-        end,
-    },
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    }
 }
