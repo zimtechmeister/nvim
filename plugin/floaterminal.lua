@@ -1,3 +1,5 @@
+-- thanks to TJ DeVries https://youtu.be/5PIiKDES_wc?si=6wfH-ITeEvpfrQIm
+
 local state = {
     floating = {
         buf = -1,

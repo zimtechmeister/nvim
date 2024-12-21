@@ -17,7 +17,7 @@ return {
             },
 
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', "lazydev" },
+                default = { 'lsp', 'path', 'snippets', 'buffer', "copilot" },
                 providers = {
                     copilot = {
                         name = "copilot",
