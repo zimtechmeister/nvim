@@ -9,6 +9,19 @@ return {
         'nvim-tree/nvim-web-devicons',
     },
     config = function()
+        -- open multiple selected files
+        local open_selected = function(prompt_bufnr)
+            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+            local selected = picker:get_multi_selection()
+            if vim.tbl_isempty(selected) then
+                require("telescope.actions").select_default(prompt_bufnr)
+            else
+                require("telescope.actions").close(prompt_bufnr)
+                for _, file in pairs(selected) do
+                    if file.path then vim.cmd("edit" .. (file.lnum and " +" .. file.lnum or "") .. " " .. file.path) end
+                end
+            end
+        end
         require('telescope').setup {
             defaults = {
                 -- Default configuration for telescope goes here:
@@ -19,6 +32,11 @@ return {
                         -- actions.which_key shows the mappings for your picker,
                         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                         ["<C-h>"] = "which_key",
+                        ["<CR>"] = open_selected,
+                    },
+                    n = {
+                        q = require("telescope.actions").close,
+                        ["<CR>"] = open_selected,
                     },
                 },
             },
@@ -46,6 +64,7 @@ return {
         pcall(require('telescope').load_extension, 'ui-select')
 
         local builtin = require 'telescope.builtin'
+        vim.keymap.set('n', '<leader>t', function() end, { desc = 'Telescope' })
         vim.keymap.set('n', '<leader>th', builtin.help_tags, { desc = '[S]earch [H]elp' })
         vim.keymap.set('n', '<leader>tk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
         vim.keymap.set('n', '<leader>tf', builtin.find_files, { desc = '[S]earch [F]iles' })
