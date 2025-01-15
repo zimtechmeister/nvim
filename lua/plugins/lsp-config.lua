@@ -20,6 +20,7 @@ return {
             require("lspconfig").clangd.setup { capabilities = capabilities }
             require("lspconfig").eslint.setup { capabilities = capabilities }
             require("lspconfig").ts_ls.setup { capabilities = capabilities }
+            require("lspconfig").nixd.setup { capabilities = capabilities }
 
             -- Autocmd to set up LSP-specific key mappings on LSP attach
             vim.api.nvim_create_autocmd('LspAttach', {
