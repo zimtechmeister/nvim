@@ -46,6 +46,14 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+-- stop automatic insertion of comments on new line 'fo-table' for reference
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        vim.opt.formatoptions:remove { "c", "r", "o" }
+    end,
+})
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
