@@ -1,8 +1,8 @@
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
-        -- 'echasnovski/mini.icons',
+        'echasnovski/mini.icons',
+        -- 'nvim-tree/nvim-web-devicons',
     },
     config = function()
         require('lualine').setup {

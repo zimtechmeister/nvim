@@ -5,8 +5,8 @@ return {
         "nvim-lua/plenary.nvim",
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'nvim-telescope/telescope-ui-select.nvim',
-        -- 'echasnovski/mini.icons',
-        'nvim-tree/nvim-web-devicons',
+        'echasnovski/mini.icons',
+        -- 'nvim-tree/nvim-web-devicons',
     },
     config = function()
         -- open multiple selected files
