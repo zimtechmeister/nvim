@@ -64,7 +64,7 @@ return {
             desc = "Buffers"
         },
         { "<leader>f/",  function() Snacks.picker.grep() end,                 desc = "Grep" },
-        { "<leader>fb",  function() Snacks.picker.grep_buffers() end,         desc = "Grep Open Buffers" },
+        { "<leader>f?",  function() Snacks.picker.grep_buffers() end,         desc = "Grep Open Buffers" },
         { "<leader>f:",  function() Snacks.picker.command_history() end,      desc = "Command History" },
         { "<leader>fn",  function() Snacks.picker.notifications() end,        desc = "Notification History" },
         { "<leader>fgb", function() Snacks.picker.git_branches() end,         desc = "Git Branches" },

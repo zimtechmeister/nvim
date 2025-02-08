@@ -18,26 +18,55 @@ return {
             require("lspconfig").lua_ls.setup { capabilities = capabilities }
             require("lspconfig").jdtls.setup { capabilities = capabilities }
             require("lspconfig").clangd.setup { capabilities = capabilities }
-            require("lspconfig").eslint.setup { capabilities = capabilities }
+            -- require("lspconfig").eslint.setup { capabilities = capabilities }
             require("lspconfig").ts_ls.setup { capabilities = capabilities }
-            require("lspconfig").nixd.setup { capabilities = capabilities }
+            require("lspconfig").nixd.setup({
+                capabilities = capabilities,
+                settings = {
+                    nixd = {
+                        nixpkgs = {
+                            expr = "import <nixpkgs> { }",
+                        },
+                        formatting = {
+                            command = { "alejandra" }, -- or nixfmt
+                        },
+                        options = {
+                            nixos = {
+                                -- "github:zimtech/nixos" or "/home/tim/nixos/"
+                                expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.CONFIGNAME.options',
+                            },
+                            home_manager = {
+                                expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.CONFIGNAME.options',
+                            },
+                        }
+                    }
+                }
+            })
 
             -- Autocmd to set up LSP-specific key mappings on LSP attach
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
                 callback = function(event)
-                    local opts = { buffer = event.buf }
-
-                    vim.keymap.set({ 'n', 'x' }, '<leader>l', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-                    vim.keymap.set('n', '<leader>lk', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-                    vim.keymap.set('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                    vim.keymap.set('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-                    vim.keymap.set('n', '<leader>lo', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-                    vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-                    vim.keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                    vim.keymap.set('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-                    vim.keymap.set('n', '<leader>lc', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+                    vim.keymap.set({ 'n', 'x' }, '<leader>l', '<cmd>lua vim.lsp.buf.format({async = true})<cr>',
+                        { desc = 'format buffer', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lk', '<cmd>lua vim.lsp.buf.hover()<cr>',
+                        { desc = 'hover', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>',
+                        { desc = 'definition', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<cr>',
+                        { desc = 'declaration', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<cr>',
+                        { desc = 'implementation', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lo', '<cmd>lua vim.lsp.buf.type_definition()<cr>',
+                        { desc = 'type definition', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>',
+                        { desc = 'references', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>',
+                        { desc = 'signature help', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>',
+                        { desc = 'rename buffer', buffer = event.buf })
+                    vim.keymap.set('n', '<leader>lc', '<cmd>lua vim.lsp.buf.code_action()<cr>',
+                        { desc = 'code actions', buffer = event.buf })
                 end,
             })
         end
