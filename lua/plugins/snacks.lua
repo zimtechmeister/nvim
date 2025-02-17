@@ -27,6 +27,12 @@ return {
                 { section = "startup" },
             },
         },
+        image = {
+            enabled = true,
+            doc = {
+                inline = vim.g.neovim_mode == "skitty" and true or false,
+            }
+        },
         indent = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },

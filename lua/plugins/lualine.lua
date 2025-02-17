@@ -1,7 +1,7 @@
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
-        'echasnovski/mini.icons',
+        'echasnovski/mini.nvim',
         -- 'nvim-tree/nvim-web-devicons',
     },
     config = function()
