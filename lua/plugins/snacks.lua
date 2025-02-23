@@ -46,9 +46,10 @@ return {
     keys = {
         { "<leader>n",  function() Snacks.notifier.hide() end,           desc = "Notification (Hide)" },
         { "<leader>nh", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
-        { "<leader>b",  function() end,                                  desc = "Buffer" },
-        { "<leader>bd", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-        { "<leader>br", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
+        -- in combination with bufferline keymaps
+        { "<leader>t",  function() end,                                  desc = "Buffer" },
+        { "<leader>td", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
+        { "<leader>tr", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<leader>g",  function() Snacks.lazygit.open() end,            desc = "Lazygit" },
         { "<leader>gb", function() Snacks.git.blame_line() end,          desc = "Git Blame Line" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
