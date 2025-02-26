@@ -47,7 +47,6 @@ return {
         { "<leader>n",  function() Snacks.notifier.hide() end,           desc = "Notification (Hide)" },
         { "<leader>nh", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
         -- in combination with bufferline keymaps
-        { "<leader>t",  function() end,                                  desc = "Buffer" },
         { "<leader>td", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
         { "<leader>tr", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<leader>g",  function() Snacks.lazygit.open() end,            desc = "Lazygit" },
@@ -57,19 +56,20 @@ return {
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",      mode = { "n", "t" } },
 
         -- picker
-        { "<leader>fp", function() Snacks.picker.pickers() end,          desc = "Picker" },
-        { "<leader>ff", function() Snacks.picker.files() end,            desc = "Find Files" },
-        {
-            "<leader>fb",
-            function()
-                Snacks.picker.buffers({
-                    on_show = function()
-                        vim.cmd.stopinsert()
-                    end,
-                })
-            end,
-            desc = "Buffers"
-        },
+        { "<leader>fp", function() Snacks.picker.pickers() end,          desc = "Pickers" },
+        { "<leader>ff", function() Snacks.picker.files() end,            desc = "Files" },
+        { "<leader>fb", function() Snacks.picker.buffers() end,            desc = "Buffers" },
+        -- {
+        --     "<leader>fb",
+        --     function()
+        --         Snacks.picker.buffers({
+        --             on_show = function()
+        --                 vim.cmd.stopinsert()
+        --             end,
+        --         })
+        --     end,
+        --     desc = "Buffers"
+        -- },
         { "<leader>f/",  function() Snacks.picker.grep() end,                 desc = "Grep" },
         { "<leader>f?",  function() Snacks.picker.grep_buffers() end,         desc = "Grep Open Buffers" },
         { "<leader>f:",  function() Snacks.picker.command_history() end,      desc = "Command History" },
@@ -78,7 +78,7 @@ return {
         { "<leader>fk",  function() Snacks.picker.keymaps() end,              desc = "Keymaps" },
         { "<leader>fh",  function() Snacks.picker.help() end,                 desc = "Help Pages" },
         { "<leader>fc",  function() Snacks.picker.colorschemes() end,         desc = "Colorschemes" },
-        { "<leader>fp",  function() Snacks.picker.projects() end,             desc = "Projects" },
+        -- { "<leader>fp",  function() Snacks.picker.projects() end,             desc = "Projects" },
         { '<leader>f"',  function() Snacks.picker.registers() end,            desc = "Registers" },
         { "<leader>fj",  function() Snacks.picker.jumps() end,                desc = "Jumps" },
         { "<leader>fm",  function() Snacks.picker.marks() end,                desc = "Marks" },

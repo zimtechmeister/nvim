@@ -18,27 +18,28 @@ return {
             require("lspconfig").lua_ls.setup { capabilities = capabilities }
             require("lspconfig").jdtls.setup { capabilities = capabilities }
             require("lspconfig").clangd.setup { capabilities = capabilities }
-            -- require("lspconfig").eslint.setup { capabilities = capabilities }
+            require("lspconfig").eslint.setup { capabilities = capabilities }
             require("lspconfig").ts_ls.setup { capabilities = capabilities }
             require("lspconfig").nixd.setup({
                 capabilities = capabilities,
+                cmd = { "nixd" },
                 settings = {
                     nixd = {
-                        nixpkgs = {
-                            expr = "import <nixpkgs> { }",
-                        },
                         formatting = {
                             command = { "alejandra" }, -- or nixfmt
                         },
-                        options = {
-                            nixos = {
-                                -- "github:zimtech/nixos" or "/home/tim/nixos/"
-                                expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.CONFIGNAME.options',
-                            },
-                            home_manager = {
-                                expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.CONFIGNAME.options',
-                            },
-                        }
+                        -- nixpkgs = {
+                        --     expr = "import <nixpkgs> { }",
+                        -- },
+                        -- options = {
+                        --     nixos = {
+                        --         -- "github:zimtech/nixos" or "/home/tim/nixos/"
+                        --         expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.default.options',
+                        --     },
+                        --     home_manager = {
+                        --         expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.tim.options',
+                        --     },
+                        -- }
                     }
                 }
             })
