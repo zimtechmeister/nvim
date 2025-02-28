@@ -28,18 +28,18 @@ return {
                         formatting = {
                             command = { "alejandra" }, -- or nixfmt
                         },
-                        -- nixpkgs = {
-                        --     expr = "import <nixpkgs> { }",
-                        -- },
-                        -- options = {
-                        --     nixos = {
-                        --         -- "github:zimtech/nixos" or "/home/tim/nixos/"
-                        --         expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.default.options',
-                        --     },
-                        --     home_manager = {
-                        --         expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.tim.options',
-                        --     },
-                        -- }
+                        nixpkgs = {
+                            expr = "import <nixpkgs> { }",
+                        },
+                        options = {
+                            nixos = {
+                                -- "github:zimtech/nixos" or "/home/tim/nixos/"
+                                expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.nixBTW.options',
+                            },
+                            home_manager = {
+                                expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.tim.options',
+                            },
+                        }
                     }
                 }
             })
