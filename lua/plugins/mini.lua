@@ -10,9 +10,11 @@ return {
                 -- vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open Mini Files' }),
                 -- open MiniFiles in cwd
                 vim.keymap.set("n", "<leader>e", function()
-                    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-                    MiniFiles.reveal_cwd()
-                end)
+                        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+                        MiniFiles.reveal_cwd()
+                    end,
+                    { desc = 'Open Mini Files' }
+                )
             })
             require('mini.surround').setup({
                 mappings = {
