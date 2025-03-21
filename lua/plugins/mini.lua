@@ -6,6 +6,14 @@ return {
             require('mini.ai').setup()
             require('mini.icons').setup()
             require('mini.pairs').setup()
+            require('mini.files').setup({
+                -- vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open Mini Files' }),
+                -- open MiniFiles in cwd
+                vim.keymap.set("n", "<leader>e", function()
+                    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+                    MiniFiles.reveal_cwd()
+                end)
+            })
             require('mini.surround').setup({
                 mappings = {
                     add = '<leader>sa',            -- Add surrounding in Normal and Visual modes
