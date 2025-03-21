@@ -2,15 +2,15 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
         'echasnovski/mini.nvim',
-        -- 'nvim-tree/nvim-web-devicons',
+        'yavorski/lualine-macro-recording.nvim'
     },
-    config = function()
-        require('lualine').setup {
-            options = {
-                -- theme = 'gruvbox-material',
-                component_separators = { left = '|', right = '|' },
-                section_separators = { left = '', right = '' },
-            }
-        }
-    end,
+    opts = {
+        options = {
+            component_separators = { left = '|', right = '|' },
+            section_separators = { left = '', right = '' },
+        },
+        sections = {
+            lualine_c = { "macro_recording", "%S" },
+        },
+    }
 }
