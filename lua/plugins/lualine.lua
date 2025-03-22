@@ -10,7 +10,7 @@ return {
             section_separators = { left = '', right = '' },
         },
         sections = {
-            lualine_c = { "macro_recording", "%S" },
+            lualine_c = { { 'filename', path = 1, }, "macro_recording", "%S" },
         },
     }
 }
