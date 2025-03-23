@@ -26,20 +26,21 @@ return {
                 settings = {
                     nixd = {
                         formatting = {
-                            command = { "alejandra" }, -- or nixfmt
+                            command = { "alejandra" },
                         },
-                        nixpkgs = {
-                            expr = "import <nixpkgs> { }",
-                        },
-                        options = {
-                            nixos = {
-                                -- "github:zimtech/nixos" or "/home/tim/nixos/"
-                                expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.nixBTW.options',
-                            },
-                            home_manager = {
-                                expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.tim.options',
-                            },
-                        }
+                        -- nixpkgs = {
+                        --     expr = "import <nixpkgs> { }",
+                        --     expr = 'import (builtins.getFlake "/home/tim/nixos").inputs.nixpkgs {}',
+                        -- },
+                        -- options = {
+                        --     nixos = {
+                        --         -- expr = '(builtins.getFlake "github:zimtech/nixos").nixosConfigurations.PC.options',
+                        --         expr = '(builtins.getFlake "/home/tim/nixos").nixosConfigurations.PC.options',
+                        --     },
+                        --     home_manager = {
+                        --         expr = '(builtins.getFlake "/home/tim/nixos").homeConfigurations.tim.options',
+                        --     },
+                        -- }
                     }
                 }
             })
