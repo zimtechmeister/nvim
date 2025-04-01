@@ -34,11 +34,11 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
+-- Sets how Neovim will display certain whitespace characters in the editor.
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
 
--- tab behaviour
+-- tab behavior
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -46,7 +46,7 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
--- stop automatic insertion of comments on new line 'fo-table' for reference
+-- Stop automatic insertion of comments on newline 'fo-table' for reference
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
     callback = function()
