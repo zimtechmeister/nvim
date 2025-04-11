@@ -38,6 +38,9 @@ return {
                     border = 'single',
                 },
             },
+            signature = {
+                enabled = true,
+            },
         },
         opts_extend = { "sources.default" }
     },

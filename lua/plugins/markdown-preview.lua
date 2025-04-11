@@ -7,6 +7,7 @@ return {
     end,
     ft = { "markdown" },
     config = function()
-        vim.keymap.set('n', '<leader>md', function() vim.cmd('MarkdownPreviewToggle') end, { desc = '[M]ark[D]own Preview Toggle' })
+        vim.keymap.set('n', '<leader>md', function() vim.cmd('MarkdownPreviewToggle') end,
+            { desc = '[M]ark[D]own Preview Toggle' })
     end,
 }
