@@ -44,7 +44,6 @@ return {
                     }
                 }
             })
-            require("lspconfig").harper_ls.setup { capabilities = capabilities }
 
             -- Autocmd to set up LSP-specific key mappings on LSP attach
             vim.api.nvim_create_autocmd('LspAttach', {
