@@ -10,13 +10,8 @@ return {
 
         opts = {
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'markdown' },
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
                 providers = {
-                    markdown = {
-                        name = 'RenderMarkdown',
-                        module = 'render-markdown.integ.blink',
-                        fallbacks = { 'lsp' },
-                    },
                     -- copilot = {
                     --     name = "copilot",
                     --     module = "blink-copilot",
