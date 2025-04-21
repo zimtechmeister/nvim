@@ -57,6 +57,7 @@ return {
         { "<leader>fp",  function() Snacks.picker.pickers() end,              desc = "Pickers" },
         { "<leader>ff",  function() Snacks.picker.files() end,                desc = "Files" },
         { "<leader>fb",  function() Snacks.picker.buffers() end,              desc = "Buffers" },
+        { "<leader>fr",  function() Snacks.picker.recent() end,               desc = "Recent Files" },
         -- {
         --     "<leader>fb",
         --     function()
