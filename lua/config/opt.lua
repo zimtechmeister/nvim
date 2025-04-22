@@ -61,7 +61,7 @@ vim.opt.cursorline = true
 
 vim.opt.colorcolumn = "80"
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 vim.opt.scrolloff = 8
 
